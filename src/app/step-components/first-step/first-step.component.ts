@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { CommonModule } from '@angular/common';
 import { CommonService } from '../../services/common.service';
-import { CarModelOptions, colorsModel } from '../../models/modelOptions';
+import { CarModelOptions, colorsModel,selectedConfigModel } from '../../models/modelOptions';
 import { HttpClient } from '@angular/common/http';
 import { StorageService } from '../../services/storage.service';
 
@@ -33,6 +33,11 @@ export class FirstStepComponent implements OnInit {
   modelCode!: string;
   selectedColorCode!: string;
   selectedModelCode!: string;
+  selectedConfigModel: selectedConfigModel ={id: 0,
+    description:  '',
+    range: 0,
+    speed: 0,
+    price: 0};
 
   constructor(private commonService: CommonService, private storageService: StorageService,
     private http: HttpClient) { }
@@ -74,6 +79,8 @@ export class FirstStepComponent implements OnInit {
       this.colorList = this.models?.find(model => model.description === this.selectedModel)?.colors || [];
       this.selectedColor = this.storageService.retrieveSelectedColor() || '';
       this.showimg();
+      this.storageService.storeConfig(this.selectedConfigModel);
+      this.storageService.storeSelectedConfig('');
       },
       error: (error) => {
         console.error('Error loading options:', error);
