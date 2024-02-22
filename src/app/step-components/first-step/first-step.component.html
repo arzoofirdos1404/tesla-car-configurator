@@ -1,0 +1,32 @@
+<div style="margin-left: 2%;">
+  <h3> Step 1: Choose your Model and color</h3>
+  <div class="row">
+    <div class="col-4">
+      <mat-label>Model:</mat-label>
+  <mat-form-field style="margin-left: 10px;">
+    <mat-select id="modelSelect" placeholder="Choose..." (selectionChange)="onModelSelection($event)"
+      [(value)]="selectedModel">
+      <mat-option *ngFor="let model of models" [value]="model.description">
+        {{ model.description }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    </div>
+    <div class="col-4">
+      <mat-label style="margin-left: 10px;" *ngIf="selectedModel">Color:</mat-label>
+  <mat-form-field style="margin-left: 10px;" *ngIf="selectedModel">
+    <mat-select id="colorSelect" placeholder="Color" (selectionChange)="onColorSelection($event)"
+      [(value)]="selectedColor">
+      <mat-option *ngFor="let color of colorList" [value]="color.description">
+        {{ color.description }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    </div>
+  </div>
+  
+  
+</div>
+<div *ngIf="selectedColor" class="img-div">
+  <img [src]="selectedImageUrl" class="model-img" alt="{{selectedModelCode}}/{{selectedColorCode}}" style="width: auto; height: auto;">
+</div>

@@ -1,0 +1,35 @@
+<div style="margin-left: 2%;">
+  <h3> Step 2: Select your config and options</h3>
+
+  <mat-label>Config: </mat-label>
+  <mat-form-field>
+    <mat-select id="configSelect" [(value)]="selectedConfig" (selectionChange)="onconfigSelection($event)">
+      <mat-option *ngFor="let config of configOptions?.configs" [value]="config.description">
+        {{ config?.description }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <div *ngIf="selectedConfig && config">
+    <p>
+      Range: {{ config.range }} miles -
+      Max speed: {{ config.speed }} -
+      Cost: {{ config.price | currency : 'USD' }}
+    </p>
+  </div>
+
+  <div>
+    <mat-label>Tow Hitch?</mat-label>
+    <mat-checkbox id="includeTow" class="example-margin" (change)="onClickCheckBox()"
+      [(ngModel)]="towHitch"></mat-checkbox>
+  </div>
+
+  <div>
+    <mat-label>Yoke steering wheel?</mat-label>
+    <mat-checkbox id="includeYoke" class="example-margin" (change)="onClickCheckBox()"
+      [(ngModel)]="yoke"></mat-checkbox>
+  </div>
+</div>
+<div class="img-div">
+  <img [src]="selectedImageUrl" class="model-img" alt="{{modelCode}}/{{selectedColorCode}}">
+</div>
