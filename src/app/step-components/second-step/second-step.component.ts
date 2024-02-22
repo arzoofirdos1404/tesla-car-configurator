@@ -41,7 +41,6 @@ export class SecondStepComponent {
     this.selectedColorCode = model?.colors?.find(color => color.description === colorDesc)?.code || '';
     this.loadConfigOptions(this.modelCode);
     this.config = this.storageService.retrieveConfig() || this.selectedConfigModel;
-    this.selectedConfig = this.storageService.retrieveSelectedConfig() || '';
     this.selectedImageUrl = this.commonService.fetchImageUrl(this.modelCode, this.selectedColorCode);
   }
 
